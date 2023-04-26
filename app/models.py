@@ -1,5 +1,5 @@
 import datetime
-from sqlalchemy import Table, Column, Integer, String, ForeignKey, Date, Text
+from sqlalchemy import Table, Column, Integer, String, ForeignKey, Date, Text, Float, Time
 from sqlalchemy.orm import relationship
 from flask_appbuilder import Model
 
@@ -108,17 +108,10 @@ class NewsCategory(Model):
     id = Column(Integer, primary_key=True)
     name = Column(String(50), nullable=False)
 
-from flask_appbuilder import Model
-from sqlalchemy import Column, Integer, String
-
 class Channel(Model):
     id = Column(Integer, primary_key=True)
     name = Column(String(50), nullable=False, unique=True)
     description = Column(String(255), nullable=False)
-
-from flask_appbuilder import Model
-from sqlalchemy import Column, Integer, String, Time, ForeignKey
-from sqlalchemy.orm import relationship
 
 class Program(Model):
     id = Column(Integer, primary_key=True)
@@ -128,8 +121,6 @@ class Program(Model):
     channel_id = Column(Integer, ForeignKey('channel.id'))
     channel = relationship('Channel')
 
-
-
 class Episode(Model):
     id = Column(Integer, primary_key=True)
     name = Column(String(50), nullable=False)
@@ -138,56 +129,24 @@ class Episode(Model):
     program_id = Column(Integer, ForeignKey('program.id'))
     program = relationship('Program')
 
-    from flask_appbuilder import Model
-from sqlalchemy import Column, Integer, String
-
 class Genre(Model):
     id = Column(Integer, primary_key=True)
-    name = Column(String(50), nullable=False, unique=True)
-
-    from flask_appbuilder import Model
-from sqlalchemy import Column, Integer, ForeignKey
+    name = Column(String(50), nullable=False, unique=True)  
 
 class ProgramGenre(Model):
     id = Column(Integer, primary_key=True)
     program_id = Column(Integer, ForeignKey('program.id'))
-    genre_id = Column(Integer, ForeignKey('genre.id'))
+    genre_id = Column(Integer, ForeignKey('genre.id'))  
 
-  
-
-class Subscription(Model):
-    id = Column(Integer, primary_key=True)
-    start_date = Column(Date, nullable=False)
-    end_date = Column(Date, nullable=False)
-    user_id = Column(Integer, ForeignKey('user.id'))
-    user = relationship('User')
-    channel_id = Column(Integer, ForeignKey('channel.id'))
-    channel = relationship('Channel')
-
- 
-
-class Payment(Model):
-    id = Column(Integer, primary_key=True)
-    amount = Column(Float, nullable=False)
-    date = Column(Date, nullable=False)
-    user_id = Column(Integer, ForeignKey('user.id'))
-    user = relationship('User')
+""" 
 
 
-class Review(Model):
-    id = Column(Integer, primary_key=True)
-    rating = Column(Float, nullable=False)
-    comments = Column(String(255), nullable=False)
-    program_id = Column(Integer, ForeignKey('program.id'))
-    program = relationship('Program')
-    user_id = Column(Integer, ForeignKey('user.id'))
-    user = relationship('User')
+
+
+
 
     
 
-class Favorite(Model):
-    id = Column(Integer, primary_key=True)
-    program_id = Column(Integer, ForeignKey('program.id'))
-    program = relationship('Program')
-    user_id = Column(Integer, ForeignKey('user.id'))
-    user = relationship('User')
+
+
+"""

@@ -1,7 +1,7 @@
 from flask_appbuilder import ModelView
 from flask_appbuilder.fieldwidgets import Select2Widget
 from flask_appbuilder.models.sqla.interface import SQLAInterface
-from .models import Employee,Department, Function, EmployeeHistory, Benefit, MenuItem, MenuCategory, News, NewsCategory
+from .models import Employee,Department, Function, EmployeeHistory, Benefit, MenuItem, MenuCategory, News, NewsCategory, Channel
 from wtforms.ext.sqlalchemy.fields import QuerySelectField
 from app import appbuilder, db
 from flask_appbuilder.baseviews import expose, BaseView
@@ -63,6 +63,35 @@ class NewsCategoryView(ModelView):
     datamodel = SQLAInterface(NewsCategory)
     list_columns = ['id', 'name']
 
+class ChannelView(ModelView):
+    datamodel = SQLAInterface(Channel)
+    list_columns = ['id', 'name', 'description']
+
+class ProgramView(ModelView):
+    datamodel = SQLAInterface(Channel)
+    list_columns = ['id', 'name']
+
+
+class EpisodeView(ModelView):
+    datamodel = SQLAInterface(Channel)
+    list_columns = ['id', 'name', 'description','air_date','program_id','program'] 
+
+class GenreView(ModelView):
+    datamodel = SQLAInterface(Channel)
+    list_columns = ['id', 'name']
+
+class ProgramGenre(ModelView):
+    datamodel = SQLAInterface(Channel)
+    list_columns = ['id','program_id' 'genre_id']
+
+
+
+
+
+
+
+
+
 class NewsPageView(BaseView):
     default_view = 'local_news'
 
@@ -90,4 +119,13 @@ appbuilder.add_view(MenuItemView, "MenuItem", icon="fa-folder-open-o", category=
 appbuilder.add_view(MenuCategoryView, "MenuCategory", icon="fa-folder-open-o", category="Admin")
 appbuilder.add_view(NewsView, "News", icon="fa-folder-open-o", category="Admin")
 appbuilder.add_view(NewsCategoryView, "NewsCategory", icon="fa-folder-open-o", category="Admin")
+appbuilder.add_view(ChannelView, "Channel", icon="fa-folder-open-o", category="Admin")
+appbuilder.add_view(ProgramView, "Program", icon="fa-folder-open-o", category="Admin")
+appbuilder.add_view(EpisodeView, "Episode", icon="fa-folder-open-o", category="Admin")
+appbuilder.add_view(GenreView, "Genre", icon="fa-folder-open-o", category="Admin")
+appbuilder.add_view(ProgramGenre, "ProgramGenre", icon="fa-folder-open-o", category="Admin")
+
+
+
+
 
